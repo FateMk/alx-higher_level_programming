@@ -5,5 +5,3 @@ for i in range(10):
         if int(str(i) + str(j)) < 89:
             print(", ", end="")
 print("")
-
-
