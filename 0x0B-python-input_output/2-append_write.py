@@ -1,17 +1,8 @@
 #!/usr/bin/python3
-""" Module that contains a function that appends to a text file
-"""
-
-
 def append_write(filename="", text=""):
-    """ Function that appends to a text file
-    Args:
-        filename: filename
-        text: text to write
-    Raises
-        Exception: when the file can be opened
-    """
-    
-    with open(filename, encoding="utf-8") as f:
-        f.write(text)
-    return len(text)
+    """appends text to input file"""
+    chars_written = 0
+    with open(filename, mode='a', encoding='utf-8') as f_io:
+        chars_written += f_io.write(text)
+        f_io.close()
+    return chars_written
