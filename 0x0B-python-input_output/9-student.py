@@ -4,7 +4,6 @@
 
 class Student:
     """class that creates a student instance"""
-    
     def __init__(self, first_name, last_name, age):
         """initializing new instance of student"""
         self.first_name = first_name
