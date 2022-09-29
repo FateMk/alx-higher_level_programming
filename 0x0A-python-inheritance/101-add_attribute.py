@@ -4,8 +4,8 @@ method module
 """
 
 
-def add_attribute(obj, a, v):
-        """add attribute to object
+def add_attribute(obj, objname, value):
+    """add attribute to object
     args:
         obj: class object
         objname: object name
@@ -13,8 +13,6 @@ def add_attribute(obj, a, v):
     return:
         na
     """
-    res = getattr(obj, "__doc__", None)
-    if res is None:
-        setattr(obj, a, v)
-    else:
+    if hasattr(obj, "__dict__") == False:
         raise TypeError("can't add new attribute")
+    setattr(obj, objname, value)
