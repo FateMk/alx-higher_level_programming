@@ -4,7 +4,6 @@
 
 class Student:
      """ Class to create student instances """
-        
     def __init__(self, first_name, last_name, age):
         """initializing new instance of student"""
         self.first_name = first_name
@@ -12,11 +11,21 @@ class Student:
         self.age = age
         
     def to_json(self, attrs=None):
-        """returns dict attributes of student"""
-        if attrs is None:
-            obj_dict = sef.__dict__
-            return obj_dict
-        else:
-            all_t = self.__dict__
-            D = dict(([k, v] for k, v in all_t.items() if k in attrs))
-            return D
+        """ Method that returns directory description """
+        obj = self.__dict__.copy()
+        if type(attrs) is list:
+
+            for item in attrs:
+                if type(item) is not str:
+                    return obj
+
+            d_list = {}
+
+            for iatr in range(len(attrs)):
+                for satr in obj:
+                    if attrs[iatr] == satr:
+                        d_list[satr] = obj[satr]
+            return d_list
+
+        return obj
+    
