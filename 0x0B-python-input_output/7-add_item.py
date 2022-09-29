@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" adding item """
+"""add item"""
 
 
 import json
