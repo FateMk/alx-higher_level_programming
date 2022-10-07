@@ -1,20 +1,34 @@
 #!/usr/bin/python3
-"""defining class Rectangle a subclass of Base"""
+"""
+    contains class Rectangle which implements Base.
+"""
 from models.base import Base
 
+
 class Rectangle(Base):
+    """
+        class Rectangle implements Base.
+        Methods:
+            __init__()
+    """
     def __init__(self, width, height, x=0, y=0, id=None):
-        """initialization"""
+        """
+            Initializes the instance of the class..
+        """
         super().__init__(id)
-        self.__width = width
-        self.__height = height
-        self.__x = x
-        self.__y = y
+        self.width = width
+        self.height = height
+        self.x = x
+        self.y = y
 
     @property
     def width(self):
-            """getter function"""
-            return self.__width
+        """
+            getter function for __width
+            Returns: width
+        """
+        return self.__width
+
     @width.setter
     def width(self, value):
         """
@@ -96,31 +110,46 @@ class Rectangle(Base):
         self.__y = value
 
     def area(self):
-        """Area function return area of rectangle"""
-        return self.__width * self.__height
+        """
+            returns the area of the Rectangle instance.
+        """
+        return (self.__width * self.__height)
 
     def display(self):
-        """prints the stdout of the rectangle instance with #"""
+        """
+            prints to stdout the Rectangle instance with '#'
+        """
+        rectangle = ""
+        print_symbol = "#"
+
 #        for i in range(self.__height - 1):
 #            rectangle += print_symbol * self.__width + "\n"
 #        rectangle += print_symbol * self.__width
 
 #        print("{}".format(rectangle))
-        rectangle = ""
-        p_symbol = "#"
 
         print("\n" * self.y, end="")
 
         for i in range(self.height):
             rectangle += (" " * self.x) + (print_symbol*self.width) + "\n"
         print(rectangle, end="")
-    
+
     def __str__(self):
-        """return string format of a rectangle"""
-        return "[{}] ({}) {}/{} - {}/{}".format(type(self).__name__, self.id, self.__x, self.__y,self.__width, self.__height)
+        """
+            returns a string formart of the rectangle
+        """
+        return "[{}] ({}) {}/{} - {}/{}".format(type(self).__name__, self.id,
+                                                self.__x, self.__y,
+                                                self.__width, self.__height)
 
     def update(self, *args, **kwargs):
-        """ assigns an argument to each atttribute"""
+        """
+            assigns key/value argument to attributes
+            kwargs is skipped if args is not empty
+            Args:
+                *args -  variable number of no-keyword args
+                **kwargs - variable number of keyworded args
+        """
         if len(args) == 0:
             for key, val in kwargs.items():
                 self.__setattr__(key, val)
@@ -136,7 +165,9 @@ class Rectangle(Base):
             pass
 
     def to_dictionary(self):
-        """returns the dictionary repr of a rect"""
+        """
+            returns the dictionary repr of a rect
+        """
         return {'x': getattr(self, "x"), 'y': getattr(self, "y"),
                 'id': getattr(self, "id"), 'height': getattr(self, "height"),
                 'width': getattr(self, "width")}
