@@ -1,11 +1,22 @@
 #!/usr/bin/node
-let args = process.argv.slice(2).map((x) => {
-  return parseInt(x);
-});
 
-if (args.length <= 1) {
-  console.log(0);
+const args = process.argv;
+
+if (isNaN(args[2])) {
+  console.log('0');
+} else if (args.length === 3) {
+  console.log('0');
 } else {
-  console.log(args.sort((a, b) => {
-    return b - a;
-  })[1]);
+  let first = parseInt(args[2], 10);
+  let second = parseInt(args[3], 10);
+  for (let i = 2; i < args.length; i++) {
+    if (parseInt(args[i], 10) > first) {
+      second = first;
+      first = parseInt(args[i], 10);
+    }
+    if (parseInt(args[i], 10) > second && parseInt(args[i], 10) < first) {
+      second = parseInt(args[i], 10);
+    }
+  }
+  console.log(second);
+}
