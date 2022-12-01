@@ -1,20 +1,16 @@
 #!/usr/bin/node
-/* 6-square.js */
 
-module.exports = {
-  Square: Square
-};
+const square = require('./5-square');
 
-const ParentSquare = require('./5-square').Square;
-
-function Square (size) {
-  ParentSquare.call(this, size, size);
-}
-Square.prototype.charPrint = function (c) {
-  if (c === undefined) {
-    c = 'X';
+module.exports = class Square extends square {
+  constructor (size) {
+    super(size, size);
   }
-  for (let col = 0; col < this.height; col++) {
-    console.log(c.repeat(this.width));
+
+  charPrint (c) {
+    const char = c || 'X';
+    for (let i = 0; i < this.height; i++) {
+      console.log(char.repeat(this.width));
+    }
   }
 };

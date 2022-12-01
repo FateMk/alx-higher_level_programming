@@ -1,11 +1,8 @@
 #!/usr/bin/node
-/* 1-rectangle.js */
 
-module.exports = {
-  Rectangle: Rectangle
+module.exports = class Rectangle {
+  constructor (w, h) {
+    this.width = w;
+    this.height = h;
+  }
 };
-
-function Rectangle (w, h) {
-  this.width = w;
-  this.height = h;
-}
