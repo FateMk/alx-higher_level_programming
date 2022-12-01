@@ -1,5 +1,7 @@
 #!/usr/bin/node
-let myObject = {
+// Replaces values 12 to 89
+
+const myObject = {
   type: 'object',
   value: 12
 };
