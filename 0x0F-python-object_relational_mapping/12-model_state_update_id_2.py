@@ -1,20 +1,32 @@
 #!/usr/bin/python3
-# Change name of State obj from db 'hbtn_0e_6_usa'
-# Change name of State where "id = 2" to "New Mexico"
-# Script should take 3 args: username, pw, and db name
-# Must use SQLAlchemy
+"""
+12-model_state_update_id_2.py
+"""
 import sys
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
 from model_state import Base, State
+from sqlalchemy import create_engine, func
+from sqlalchemy.orm import sessionmaker
 
-if __name__ == "__main__":
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost:3306/{}"
+
+def init_sess():
+    """initializes session instance of DB using sqlalchemy"""
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
                            .format(sys.argv[1], sys.argv[2], sys.argv[3]))
     Session = sessionmaker(bind=engine)
     session = Session()
+    return (engine, session)
 
-    res = session.query(State).filter(State.id == 2)
-    res.update({"name": ("New Mexico")})
 
+def update_state(db):
+    """Change the name of the State where id = 2 to New Mexico"""
+    session = db[1]
+    s = session.query(State).filter(State.id == 2).one()
+    s.name = "New Mexico"
+    session.add(s)
     session.commit()
+    session.close()
+    db[0].dispose()
+
+
+if __name__ == '__main__':
+    update_state(init_sess())
