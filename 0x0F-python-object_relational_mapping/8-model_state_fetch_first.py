@@ -1,20 +1,33 @@
 #!/usr/bin/python3
-# Print the first 'State' object from db 'hbtn_0e_6_usa'
-# Script should take 3 args: username, pw, and db name
-# Must use SQLAlchemy
+"""
+8-model_state_fetch_first.py
+"""
 import sys
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
 from model_state import Base, State
+from sqlalchemy import create_engine, func
+from sqlalchemy.orm import sessionmaker
 
-if __name__ == "__main__":
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost:3306/{}"
+
+def init_sess():
+    """initializes session instance of DB using sqlalchemy"""
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
                            .format(sys.argv[1], sys.argv[2], sys.argv[3]))
     Session = sessionmaker(bind=engine)
     session = Session()
+    return (engine, session)
 
-    res = session.query(State.id, State.name).first()
-    if (res is None):
+
+def print_min_state(db):
+    """prints the state with min value using first()"""
+    session = db[1]
+    instance = session.query(State).first()
+    try:
+        print(instance.id, ': ', instance.name, sep='')
+    except:
         print("Nothing")
-    else:
-        print("{:d}: {}".format(res[0], res[1]))
+    session.close()
+    db[0].dispose()
+
+
+if __name__ == '__main__':
+    print_min_state(init_sess())
