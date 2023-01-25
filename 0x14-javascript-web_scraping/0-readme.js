@@ -4,7 +4,7 @@
 const request = require('request');
 let url = process.argv[2];
 
-request.readFile (url, 'utf8', function (error, body) {
+request.readFile (url, 'utf8', function (error, body)  => {
  if (error) {
   console.log(error);
  } else {
