@@ -2,7 +2,7 @@
 /* 2-statuscode.js */
 
 const request = require("request");
-let reqURL =process.argv[1];
+let reqURL =process.argv[2];
 
 request (reqURL, function(error, response, body) {
 	if (error) {
