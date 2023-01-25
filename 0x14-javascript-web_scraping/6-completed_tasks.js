@@ -10,7 +10,6 @@ request.get(url, function (error, response, body) {
     computeTasks(body);
   }
 });
-
 function computeTasks (body) {
   const usersObj = Object();
   const tasksByUser = JSON.parse(body);
