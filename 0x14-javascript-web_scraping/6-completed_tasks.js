@@ -3,6 +3,7 @@
 
 const request = require('request');
 const url = process.argv[2];
+
 request.get(url, function (error, response, body) {
   if (error) {
     console.log(error);
@@ -10,9 +11,11 @@ request.get(url, function (error, response, body) {
     computeTasks(body);
   }
 });
+
 function computeTasks (body) {
   const usersObj = Object();
   const tasksByUser = JSON.parse(body);
+  
   for (let userTask in tasksByUser) {
     let userId = tasksByUser[userTask].userId.toString();
     if (tasksByUser[userTask].completed) {
