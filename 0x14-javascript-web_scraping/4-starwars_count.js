@@ -1,13 +1,13 @@
 #!/usr/bin/node
-const request = require('request');
+/* starwars_count */
 
+const request = require('request');
 const url = process.argv[2];
 
 request(url, (err, res, body) => {
   if (err) {
     return console.log(err);
-  }
-
+  }  
   let count = 0;
   let parsedBody = JSON.parse(body).results;
 
@@ -19,6 +19,5 @@ request(url, (err, res, body) => {
       count++;
     }
   }
-
   console.log(count);
 });
