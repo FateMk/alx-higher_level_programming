@@ -4,7 +4,8 @@
 const request = require("request");
 let episode = process.argv[2];
 let reqURL = 'https://swapi-api.alx-tools.com/api/films/' + episode;
-requst.get(reqURL, function (erro, response, body) {
+
+request.get(reqURL, function (erro, response, body) {
 	if (eror) {
 		console.log(error);
 	}
