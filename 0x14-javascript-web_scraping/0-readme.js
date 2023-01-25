@@ -8,6 +8,6 @@ request.readFile (url, 'utf8', function (error, body) {
  if (error) {
   console.log(error);
  } else {
-  console.log(body);
+  process.stdout.write(body);
  }
 });
