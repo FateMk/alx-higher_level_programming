@@ -1,16 +1,17 @@
 #!/usr/bin/node
 /* 3-starwars_title.js */
 
-const request = require("request");
-let episode = process.argv[2];
-let reqURL = 'https://swapi-api.alx-tools.com/api/films/' + episode;
+const request = require('request');
 
-request.get(reqURL, function (erro, response, body) {
-	if (eror) {
-		console.log(error);
-	}
-	if (body {
-		body = JSON.parse(body));
-		console.log(body.title);
-	}
+const episodeId = process.argv[2];
+
+if (parseInt(episodeId) < 8) {
+  const url = 'http://swapi.co/api/films/' + episodeId;
+
+  request(url, (err, res, body) => {
+    if (err) {
+      return console.log(err);
+    }
+    console.log(JSON.parse(body).title);
 });
+}
