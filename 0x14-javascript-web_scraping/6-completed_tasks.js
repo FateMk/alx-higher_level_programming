@@ -2,29 +2,17 @@
 /* 6-completed_task.js */
 
 const request = require('request');
-const url = process.argv[2];
-
-request.get(url, function (error, response, body) {
-  if (error) {
-    console.log(error);
-  } else {
-    computeTasks(body);
+request(process.argv[2], function (error, response, body) {
+  if (!error) {
+    const todos = JSON.parse(body);
+    let completed = {};
+    todos.forEach((todo) => {
+      if (todo.completed && completed[todo.userId] === undefined) {
+        completed[todo.userId] = 1;
+      } else if (todo.completed) {
+        completed[todo.userId] += 1;
+      }
+    });
+    console.log(completed);
   }
 });
-
-function computeTasks (body) {
-  const usersObj = Object();
-  const tasksByUser = JSON.parse(body);
-  
-  for (let userTask in tasksByUser) {
-    let userId = tasksByUser[userTask].userId.toString();
-    if (tasksByUser[userTask].completed) {
-      if (usersObj[userId] === undefined) {
-        usersObj[userId] = 1;
-      } else {
-        usersObj[userId]++;
-      }
-    }
-  }
-  console.log(usersObj);
-}
