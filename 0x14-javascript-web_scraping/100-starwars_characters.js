@@ -6,11 +6,14 @@ let filmID = process.argv[2];
 let reqUrl = 'https://swapi-api.alx-tools.com/api/' + filmID;
 
 request.get(reqUrl, function (error, response, body) {
-  if (error) {
-    console.log(error);
-  }
-  if (body) {
-    body = JSON.parse(body);
-    console.log(body.characters);
+  if (!error) {
+    const characters = JSON.parse(body).characters;
+    characters.forEach((character) => {
+      request(character, function (error, response, body) {
+        if (!error) {
+          console.log(JSON.parse(body).name);
+        }
+      });
+    });
   }
 });
